@@ -23,5 +23,10 @@ public class DemoClientCommand extends HystrixCommand<String> {
         return response.getBody();
     }
 
-    //TODO: Override getFallback method
+    @Override
+    protected String getFallback() {
+
+//        throw new DemoException("Fallback threw exception!");
+        return "Couldn't get string from remote!";
+    }
 }
