@@ -22,4 +22,6 @@ public class DemoClientCommand extends HystrixCommand<String> {
 
         return response.getBody();
     }
+
+    //TODO: Override getFallback method
 }
