@@ -19,6 +19,7 @@ public class DemoController {
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     public String getDemo() {
+        // TODO - call remote service through hystrix command
         return demoService.getRemoteData();
     }
 }

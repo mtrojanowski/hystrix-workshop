@@ -10,7 +10,9 @@ public class DemoService {
         this.demoClient = demoClient;
     }
 
-    public String getRemoteData() {
+    public String getRemoteData()
+    {
+        // TODO - call remote service through hystrix command
         return demoClient.getRemoteData();
     }
 }

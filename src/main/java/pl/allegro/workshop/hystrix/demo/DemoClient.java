@@ -15,6 +15,7 @@ public class DemoClient {
     }
 
     String getRemoteData() {
+        // TODO - call remote service through hystrix command
         ResponseEntity<String> response = restTemplate.getForEntity(REMOTE_URL, String.class);
 
         return response.getBody();
