@@ -1,5 +1,6 @@
 package pl.allegro.workshop.hystrix.demo;
 
+import com.netflix.hystrix.HystrixCommand;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -15,9 +16,8 @@ public class DemoClient {
     }
 
     String getRemoteData() {
-        // TODO - call remote service through hystrix command
-        ResponseEntity<String> response = restTemplate.getForEntity(REMOTE_URL, String.class);
+        HystrixCommand<String> command = new DemoClientCommand(restTemplate, REMOTE_URL);
 
-        return response.getBody();
+        return command.execute();
     }
 }
