@@ -11,4 +11,6 @@ public class DemoConfiguration {
     public RestTemplate restTemplate() {
         return new RestTemplate();
     }
+
+    // TODO: Add servlet configuration
 }
