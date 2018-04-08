@@ -1,5 +1,7 @@
 package pl.allegro.workshop.hystrix.demo;
 
+import com.netflix.hystrix.contrib.metrics.eventstream.HystrixMetricsStreamServlet;
+import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
@@ -13,4 +15,8 @@ public class DemoConfiguration {
     }
 
     // TODO: Add servlet configuration
+    @Bean
+    public ServletRegistrationBean<HystrixMetricsStreamServlet> hystrixStreamServlet() {
+        return new ServletRegistrationBean<>(new HystrixMetricsStreamServlet(), "/hystrix.stream");
+    }
 }
