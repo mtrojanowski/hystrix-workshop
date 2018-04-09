@@ -9,7 +9,6 @@ import org.springframework.web.client.RestTemplate;
 import rx.Emitter;
 import rx.Observable;
 
-// TODO: Extend HystrixObservableCommand and implement
 public class DemoClientObservableCommand extends HystrixObservableCommand<String> {
 
     private final RestTemplate restTemplate;

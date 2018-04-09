@@ -17,10 +17,10 @@ public class DemoClient {
         this.restTemplate = restTemplate;
     }
 
+    // TODO create command using annotation
     Future<String> getRemoteData() {
         HystrixCommand<String> command = new DemoClientCommand(restTemplate, REMOTE_URL);
 
-        // TODO: call command asynchronously
         return command.queue();
     }
 

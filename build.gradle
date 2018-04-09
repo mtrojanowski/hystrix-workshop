@@ -27,9 +27,9 @@ repositories {
 dependencies {
 	compile 'org.springframework.boot:spring-boot-starter-web'
 	compile 'com.netflix.hystrix:hystrix-core:1.5.12'
-
-	// TODO: add hystrix metrics stream library
 	compile 'com.netflix.hystrix:hystrix-metrics-event-stream:1.5.12'
+
+	// TODO add javanica support
 
 	testCompile 'org.springframework.boot:spring-boot-starter-test'
 }

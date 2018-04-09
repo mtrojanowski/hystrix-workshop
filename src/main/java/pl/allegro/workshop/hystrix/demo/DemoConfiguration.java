@@ -14,7 +14,6 @@ public class DemoConfiguration {
         return new RestTemplate();
     }
 
-    // TODO: Add servlet configuration
     @Bean
     public ServletRegistrationBean<HystrixMetricsStreamServlet> hystrixStreamServlet() {
         return new ServletRegistrationBean<>(new HystrixMetricsStreamServlet(), "/hystrix.stream");
