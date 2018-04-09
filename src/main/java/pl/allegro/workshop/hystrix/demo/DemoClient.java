@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import rx.Emitter;
 import rx.Observable;
@@ -32,8 +33,12 @@ public class DemoClient {
         commandKey = "myCommandGetRemoteData",
         fallbackMethod = "getRemoteDataFallback",
         commandProperties = {
-            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "500")
-        }
+            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "500"),
+            @HystrixProperty(name = "circuitBreaker.errorThresholdPercentage", value = "10"),
+            @HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "8000"),
+            @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "10")
+        },
+        ignoreExceptions = { HttpClientErrorException.class }
     )
     String getRemoteData() {
         ResponseEntity<String> response = restTemplate.getForEntity(REMOTE_URL, String.class);
@@ -75,14 +80,12 @@ public class DemoClient {
     )
     Observable<String> getObservableData() {
         return Observable.create((subscriber -> {
-            logger.info("About to ask remote service!");
             ResponseEntity<String> response = restTemplate.getForEntity(REMOTE_URL, String.class);
             subscriber.onNext(response.getBody());
         }), Emitter.BackpressureMode.DROP);
     }
 
     Observable<String> getRemoteDataObservableFallback() {
-        logger.info("I'm using fallback :/");
         return Observable.just("Couldn't observe data :(");
     }
 }

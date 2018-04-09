@@ -3,6 +3,7 @@ package pl.allegro.workshop.hystrix.demo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.HttpClientErrorException;
 import rx.Observable;
 
 @Component
@@ -16,8 +17,14 @@ public class DemoService {
     }
 
     public String getRemoteData() throws Exception {
-        logger.info("Service running!");
-        return demoClient.getRemoteData();
+        String data;
+        try {
+            data = demoClient.getRemoteData();
+        } catch (HttpClientErrorException e) { // This is not how it should be done ;)
+            data = "No data...";
+        }
+
+        return data;
     }
 
 

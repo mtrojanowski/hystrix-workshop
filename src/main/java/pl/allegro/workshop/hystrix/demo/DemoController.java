@@ -44,7 +44,6 @@ public class DemoController {
         Observable<String> obs = demoService.getObservableData();
         DeferredResult<String> result = new DeferredResult<>();
 
-        logger.info("Imma in controller!");
         obs
             .subscribeOn(Schedulers.io())
             .subscribe(result::setResult, result::setErrorResult);
