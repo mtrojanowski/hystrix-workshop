@@ -1,5 +1,6 @@
 package pl.allegro.workshop.hystrix.demo;
 
+import com.netflix.hystrix.contrib.javanica.aop.aspectj.HystrixCommandAspect;
 import com.netflix.hystrix.contrib.metrics.eventstream.HystrixMetricsStreamServlet;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -17,5 +18,10 @@ public class DemoConfiguration {
     @Bean
     public ServletRegistrationBean<HystrixMetricsStreamServlet> hystrixStreamServlet() {
         return new ServletRegistrationBean<>(new HystrixMetricsStreamServlet(), "/hystrix.stream");
+    }
+
+    @Bean
+    public HystrixCommandAspect hystrixCommandAspect() {
+        return new HystrixCommandAspect();
     }
 }

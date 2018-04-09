@@ -30,6 +30,13 @@ public class DemoController {
         return demoService.getRemoteData();
     }
 
+    @GetMapping("/future-demo")
+    @ResponseBody
+    @ResponseStatus(HttpStatus.OK)
+    public String getFutureDemo() throws Exception {
+        return demoService.getFutureRemoteData();
+    }
+
     @GetMapping("/observable-demo")
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)

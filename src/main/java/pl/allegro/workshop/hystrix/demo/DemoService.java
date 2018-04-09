@@ -17,7 +17,12 @@ public class DemoService {
 
     public String getRemoteData() throws Exception {
         logger.info("Service running!");
-        return demoClient.getRemoteData().get();
+        return demoClient.getRemoteData();
+    }
+
+
+    public String getFutureRemoteData() throws Exception {
+        return demoClient.getFutureRemoteData().get();
     }
 
     Observable<String> getObservableData() {
