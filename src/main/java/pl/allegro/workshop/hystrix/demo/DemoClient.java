@@ -26,7 +26,7 @@ public class DemoClient {
         this.restTemplate = restTemplate;
     }
 
-    // TODO create command using annotation
+    // TODO: configure circuit-breaker
     @HystrixCommand(
         groupKey = "myGroup",
         commandKey = "myCommandGetRemoteData",
