@@ -34,10 +34,19 @@ public class DemoClient {
         fallbackMethod = "getRemoteDataFallback",
         commandProperties = {
             @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "500"),
-            @HystrixProperty(name = "circuitBreaker.errorThresholdPercentage", value = "10"),
+            @HystrixProperty(name = "circuitBreaker.errorThresholdPercentage", value = "60"),
             @HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "8000"),
-            @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "10")
+            @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "10"),
+
+//            @HystrixProperty(name = "execution.isolation.strategy", value = "THREAD")
+            @HystrixProperty(name = "execution.isolation.strategy", value = "SEMAPHORE"),
+            @HystrixProperty(name = "execution.isolation.semaphore.maxConcurrentRequests", value = "3")
+
         },
+        threadPoolKey = "myWorkshopPool",
+//        threadPoolProperties = {
+//            @HystrixProperty(name="coreSize", value="3")
+//        },
         ignoreExceptions = { HttpClientErrorException.class }
     )
     String getRemoteData() {
