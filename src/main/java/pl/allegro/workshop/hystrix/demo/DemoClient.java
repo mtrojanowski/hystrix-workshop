@@ -27,7 +27,7 @@ public class DemoClient {
         this.restTemplate = restTemplate;
     }
 
-    // TODO: configure circuit-breaker
+    // TODO: configure thread pool and then semaphore
     @HystrixCommand(
         groupKey = "myGroup",
         commandKey = "myCommandGetRemoteData",
